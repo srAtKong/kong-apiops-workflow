@@ -1,0 +1,19 @@
+_id: env_afc0ae8397054cf580efd44f88b3710c
+type: Environment
+parentId: env_98ca71149a7cb9bc0e00c9a755315f204b6fbc69
+modified: 1631269155513
+created: 1631269116888
+name: Azure
+data:
+  scheme:
+    - http
+  base_path: ""
+  host: proxy-20.53.172.11.nip.io
+dataPropertyOrder:
+  "&":
+    - scheme
+    - base_path
+    - host
+color: null
+isPrivate: false
+metaSortKey: 1631269116888

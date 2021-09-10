@@ -1,0 +1,85 @@
+_id: spc_f85a0217a13c4146955dc512a77cfa70
+type: ApiSpec
+parentId: wrk_7b56d716c5424a37beaf47c1ac5ed85b
+modified: 1631269099784
+created: 1631268851818
+fileName: customer-api.yaml
+contents: |-
+  openapi: "3.0.0"
+  info:
+    version: 1.0.1
+    title: customer
+    license:
+      name: Kong
+
+  servers:
+    - url: ${UPSTREAM_SERVER_URL}$
+      description: Upstream server URL.
+
+  paths:
+    "/customers":
+      get:
+        summary: List all customers
+        operationId: listCustomers
+        tags:
+          - customers
+        x-kong-plugin-mocking:
+          enabled: true
+          config:
+            api_specification_filename: customer.yaml
+            
+        responses:
+          '200':
+            description: An array of customers                    
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Customers"
+                example:
+                  response:
+                    value:
+                      - id: 4789
+                        customerName: Robert DeNiro
+                      - id: 36987
+                        customerName: Al Pacino   
+          default:
+            description: unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Error"
+
+  components:
+    schemas:
+      Customer:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          customerName:
+            type: string          
+        example:
+          id:123
+          customerName:'John Smith'
+      Customers:
+        type: array
+        items:
+          $ref: "#/components/schemas/Customer"
+        example:
+          - id: 1235
+            customerName: John Smith
+          - id: 1236
+            customerName: Dave Smith
+      Error:
+        type: object
+        required:
+          - code
+          - message
+        properties:
+          code:
+            type: integer
+            format: int32
+          message:
+            type: string
+contentType: yaml

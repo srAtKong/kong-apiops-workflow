@@ -1,0 +1,15 @@
+_id: env_env_98ca71149a7cb9bc0e00c9a755315f204b6fbc69_sub
+type: Environment
+parentId: env_98ca71149a7cb9bc0e00c9a755315f204b6fbc69
+modified: 1631269099776
+created: 1631269099776
+name: OpenAPI env
+data:
+  scheme:
+    - http
+  base_path: $%7BUPSTREAM_SERVER_URL%7D$
+  host: ""
+dataPropertyOrder: null
+color: null
+isPrivate: false
+metaSortKey: 1631269099776
