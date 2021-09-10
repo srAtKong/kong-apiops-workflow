@@ -1,0 +1,6 @@
+_id: uts_82c8f25e5634497a944388502d3af398
+type: UnitTestSuite
+parentId: wrk_7b56d716c5424a37beaf47c1ac5ed85b
+modified: 1631275608142
+created: 1631275608142
+name: customer-api-test
