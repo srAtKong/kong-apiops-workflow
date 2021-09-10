@@ -94,7 +94,7 @@ jobs:
 
       # Deploy to Kong
       - name: Deploy to Kong
-        run: deck sync --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --workspace ${{ secrets.KONG_WORKSPACE }} --skip-consumers --kong-addr ${{ secrets.KONG_ADDR }} -s kong.yaml
+        run: deck sync --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --workspace ${{ secrets.KONG_WORKSPACE }} --skip-consumers --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml
             
       # Run API tests
       - name: Run test suites
