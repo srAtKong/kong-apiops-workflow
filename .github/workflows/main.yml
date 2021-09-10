@@ -43,8 +43,6 @@ jobs:
           sudo cp /tmp/deck /usr/local/bin/ 
       - name: Install inso
         run: npm install -g insomnia-inso@2.3.0
-      - name: Install httpie
-        run: apt install httpie
      
       # API Spec linting
       - name: Validate specification
