@@ -63,7 +63,7 @@ jobs:
       - name: Deploy to Kong Dev Portal
         run: |          
           inso export spec customer-api --output specs/customer.yaml
-          http POST ${{ secrets.KONG_ADMIN_ADDR }}/${{ secrets.KONG_WORKSPACE }}/files path=./specs/customer.yaml contents=@specs/customer.yaml ${{ secrets.KONG_ADMIN_TOKEN }}
+          curl -X POST ${{ secrets.KONG_ADMIN_ADDR }}/${{ secrets.KONG_WORKSPACE }}/files -F path=specs/customer.yaml -F contents=@specs/customer.yaml --headers "kong-admin-token: ${{ secrets.KONG_ADMIN_TOKEN }}"
             
       - name: Restore original OAS Spec
         run: |
