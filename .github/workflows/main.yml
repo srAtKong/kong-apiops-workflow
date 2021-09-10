@@ -79,7 +79,7 @@ jobs:
       # Generate declarative config
       - name: Generate Kong declarative config
         run: |
-          inso generate config customer-api --type declarative --tags $TAG--output kong.yaml 
+          inso generate config customer-api --type declarative --tags $TAG --output kong.yaml 
           cat kong.yaml
         env:
           TAG: customer-api
@@ -98,6 +98,6 @@ jobs:
             
       # Run API tests
       - name: Run test suites
-        run: inso run test customer-api -e ${{ env.TARGET_ENVIRONMENT }}
+        run: inso run test customer-api -e ${{ env.TARGET_ENVIRONMENT }} --ci
         env:
           TARGET_ENVIRONMENT: Azure
