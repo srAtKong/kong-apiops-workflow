@@ -1,7 +1,7 @@
 _id: spc_f85a0217a13c4146955dc512a77cfa70
 type: ApiSpec
 parentId: wrk_7b56d716c5424a37beaf47c1ac5ed85b
-modified: 1631275067312
+modified: 1631276180670
 created: 1631268851818
 fileName: customer-api
 contents: |-
@@ -24,8 +24,8 @@ contents: |-
         tags:
           - customers
           
-  #       security:
-  #         - api_key: []
+        security:
+          - api_key: []
           
   #       x-kong-plugin-rate-limiting: 
   #         enabled: true
@@ -87,9 +87,9 @@ contents: |-
             format: int32
           message:
             type: string
-  #   securitySchemes:
-  #     api_key:
-  #       type: apiKey
-  #       name: apiKey
-  #       in: header
+    securitySchemes:
+      api_key:
+        type: apiKey
+        name: apiKey
+        in: header
 contentType: yaml
