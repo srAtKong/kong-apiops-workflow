@@ -1,8 +1,8 @@
 _id: wrk_7b56d716c5424a37beaf47c1ac5ed85b
 type: Workspace
 parentId: null
-modified: 1631268851816
+modified: 1631269763593
 created: 1631268851816
 name: customer-api.yaml
-description: ""
+description: This is a simple customer api for demonstration purposes
 scope: design
