@@ -98,6 +98,6 @@ jobs:
             
       # Run API tests
       - name: Run test suites
-        run: inso run test customer-api -e ${{ env.TARGET_ENVIRONMENT }} --ci
+        run: inso run test customer-api-test -e ${{ env.TARGET_ENVIRONMENT }} --ci
         env:
           TARGET_ENVIRONMENT: Azure
