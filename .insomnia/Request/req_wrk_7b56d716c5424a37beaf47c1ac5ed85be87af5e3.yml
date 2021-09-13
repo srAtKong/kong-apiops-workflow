@@ -1,7 +1,7 @@
 _id: req_wrk_7b56d716c5424a37beaf47c1ac5ed85be87af5e3
 type: Request
 parentId: wrk_7b56d716c5424a37beaf47c1ac5ed85b
-modified: 1631269099772
+modified: 1631504814582
 created: 1631269099772
 url: "{{ base_url }}/customers"
 name: List all customers
@@ -13,6 +13,7 @@ headers:
   - name: apiKey
     disabled: false
     value: "{{ apiKey }}"
+    id: pair_1be3a8e2e4e84e57b0563e9375d257b8
 authentication: {}
 metaSortKey: -1631269099772
 isPrivate: false
