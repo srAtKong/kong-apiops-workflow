@@ -9,7 +9,10 @@ description: ""
 method: GET
 body: {}
 parameters: []
-headers: []
+headers:
+  - name: apiKey
+    disabled: false
+    value: "{{ apiKey }}"
 authentication: {}
 metaSortKey: -1631269099772
 isPrivate: false

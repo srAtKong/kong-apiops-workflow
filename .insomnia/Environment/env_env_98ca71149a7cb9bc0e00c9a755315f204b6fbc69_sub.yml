@@ -9,6 +9,7 @@ data:
     - http
   base_path: $%7BUPSTREAM_SERVER_URL%7D$
   host: ""
+  apiKey: apiKey
 dataPropertyOrder: null
 color: null
 isPrivate: false
