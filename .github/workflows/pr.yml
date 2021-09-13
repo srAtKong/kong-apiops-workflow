@@ -1,0 +1,69 @@
+# This is a basic workflow for APIOps
+
+name: Validate on PR
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on pull request events
+  pull_request:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  validate-customer-api:
+    name: Validate Customer API to Gateway and Dev Portal
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v1
+      - name: Create temp dirs
+        run: |
+          mkdir ./spec
+          mkdir ./spec-backup
+      - name: Backup Insomnia Spec
+        run: |
+          cp ./.insomnia/ApiSpec/*.yml ./spec-backup
+          ls ./spec-backup 
+      #Install dev tools
+      - name: Install NodeJS
+        uses: actions/setup-node@v1
+      - name: Install Deck  
+        run: |
+          curl -sL https://github.com/kong/deck/releases/download/v1.6.0/deck_1.6.0_linux_amd64.tar.gz -o deck.tar.gz
+          tar -xf deck.tar.gz -C /tmp
+          sudo cp /tmp/deck /usr/local/bin/ 
+      - name: Install inso
+        run: npm install -g insomnia-inso@2.3.0
+     
+      # API Spec linting
+      - name: Validate specification
+        run: inso lint spec customer-api
+        
+      - name: Prepare Upstream URL for Kong declarative config
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '${'
+          tokenSuffix: '}$'
+          files: '["./.insomnia/ApiSpec/*.yml"]'
+        env:
+          UPSTREAM_SERVER_URL: '${{ secrets.UPSTREAM_SERVER_URL }}'
+      
+      # Generate declarative config
+      - name: Generate Kong declarative config
+        run: |
+          inso generate config customer-api --type declarative --tags $TAG --output kong.yaml 
+          cat kong.yaml
+        env:
+          TAG: customer-api
+
+      - name: Check connectivity to Kong Control Plane
+        run: |
+          deck ping --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }}
+      
+      - name: Validate the Declarative Config File
+        run: |
+          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml
+          
+      - name: View configuration drift
+        run: |
+          deck diff --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -w ${{ secrets.KONG_WORKSPACE }}
