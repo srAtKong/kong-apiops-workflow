@@ -81,6 +81,7 @@ jobs:
       
   publish-customer-api-to-portal:
     name: Publish Customer API to Dev Portal
+    needs: deploy-customer-api
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
