@@ -98,7 +98,7 @@ jobs:
         
       # Wait for 5 secs for the config to propagate from CP->DP
       - name: Wait
-        run:  sleep 5000
+        run:  sleep 5
             
       # Run API tests
       - name: Run test suites
