@@ -86,15 +86,6 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v1
-        
-      - name: Create temp dirs
-        run: |
-          mkdir ./spec
-          mkdir ./spec-backup
-      - name: Backup Insomnia Spec
-        run: |
-          cp ./.insomnia/ApiSpec/*.yml ./spec-backup
-          ls ./spec-backup 
 
       #Install dev tools
       - name: Install NodeJS
