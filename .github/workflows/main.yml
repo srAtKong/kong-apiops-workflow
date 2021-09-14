@@ -43,29 +43,6 @@ jobs:
           sudo cp /tmp/deck /usr/local/bin/ 
       - name: Install inso
         run: npm install -g insomnia-inso@2.3.0
-     
-      # API Spec linting
-      - name: Validate specification
-        run: inso lint spec customer-api
-      
-      # Deploy Customer OAS spec to the Dev Portal
-      - name: Prepare Server URL for Spec
-        uses: cschleiden/replace-tokens@v1
-        with:
-          tokenPrefix: '${'
-          tokenSuffix: '}$'
-          files: '["./.insomnia/ApiSpec/*.yml"]'
-        env:
-          UPSTREAM_SERVER_URL: '${{ secrets.KONG_PROXY_ADDR }}'           
-      # We will push to the Kong dev portal
-      - name: Deploy to Kong Dev Portal
-        run: |          
-          inso export spec customer-api --output specs/customer.yaml
-          curl -X POST ${{ secrets.KONG_ADMIN_ADDR }}/${{ secrets.KONG_WORKSPACE }}/files -F path=specs/customer.yaml -F contents=@specs/customer.yaml -H "kong-admin-token: ${{ secrets.KONG_ADMIN_TOKEN }}"
-            
-      - name: Restore original OAS Spec
-        run: |
-          cp  ./spec-backup/*.yml ./.insomnia/ApiSpec    
 
       - name: Prepare Upstream URL for Kong declarative config
         uses: cschleiden/replace-tokens@v1
@@ -105,3 +82,25 @@ jobs:
         run: inso run test customer-api-test -e ${{ env.TARGET_ENVIRONMENT }} --ci
         env:
           TARGET_ENVIRONMENT: Azure
+      
+      - name: Restore original OAS Spec for updating Server URL
+        run: |
+          cp  ./spec-backup/*.yml ./.insomnia/ApiSpec 
+          
+      # Deploy Customer OAS spec to the Dev Portal
+      - name: Prepare Server URL for Spec
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '${'
+          tokenSuffix: '}$'
+          files: '["./.insomnia/ApiSpec/*.yml"]'
+        env:
+          UPSTREAM_SERVER_URL: '${{ secrets.KONG_PROXY_ADDR }}'    
+          
+      # We will push to the Kong dev portal
+      - name: Deploy to Kong Dev Portal
+        run: |          
+          inso export spec customer-api --output specs/customer.yaml
+          curl -X POST ${{ secrets.KONG_ADMIN_ADDR }}/${{ secrets.KONG_WORKSPACE }}/files -F path=specs/customer.yaml -F contents=@specs/customer.yaml -H "kong-admin-token: ${{ secrets.KONG_ADMIN_TOKEN }}"
+            
+       
