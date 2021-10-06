@@ -112,6 +112,6 @@ jobs:
       - name: Deploy to Kong Dev Portal
         run: |          
           inso export spec customer-api --output specs/customer.yaml
-          curl -X POST ${{ secrets.KONG_ADMIN_ADDR }}/${{ secrets.KONG_WORKSPACE }}/files -F path=specs/customer.yaml -F contents=@specs/customer.yaml -H "kong-admin-token: ${{ secrets.KONG_ADMIN_TOKEN }}"
+          curl -X PUT ${{ secrets.KONG_ADMIN_ADDR }}/${{ secrets.KONG_WORKSPACE }}/files -F path=specs/customer.yaml -F contents=@specs/customer.yaml -H "kong-admin-token: ${{ secrets.KONG_ADMIN_TOKEN }}"
             
        
