@@ -1,7 +1,7 @@
 _id: spc_f85a0217a13c4146955dc512a77cfa70
 type: ApiSpec
 parentId: wrk_7b56d716c5424a37beaf47c1ac5ed85b
-modified: 1633489983617
+modified: 1633504387436
 created: 1631268851818
 fileName: customer-api
 contents: |-
@@ -24,14 +24,14 @@ contents: |-
         tags:
           - customers
           
-        security:
-          - api_key: []
+  #       security:
+  #         - api_key: []
           
-        x-kong-plugin-rate-limiting: 
-          enabled: true
-          config:        
-            minute: 5
-            policy: local
+  #       x-kong-plugin-rate-limiting: 
+  #         enabled: true
+  #         config:        
+  #           minute: 5
+  #           policy: local
           
         responses:
           '200':
