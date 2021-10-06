@@ -69,9 +69,9 @@ jobs:
       - name: Deploy to Kong
         run: deck sync --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --workspace ${{ secrets.KONG_WORKSPACE }} --skip-consumers --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml
         
-      # Wait for 2 secs for the config to propagate from CP->DP
+      # Wait for 10 secs for the config to propagate from CP->DP // My CP is far away from DPs
       - name: Wait
-        run:  sleep 2
+        run:  sleep 10
             
       # Run API tests
       - name: Run test suites
