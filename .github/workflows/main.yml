@@ -108,10 +108,18 @@ jobs:
         env:
           UPSTREAM_SERVER_URL: '${{ secrets.KONG_PROXY_ADDR }}'    
           
-      # We will push to the Kong dev portal
-      - name: Deploy to Kong Dev Portal
+      # Deploy to Kong Dev Portal using portal CLI
+      # - name: Deploy to Kong Dev Portal
+      #   run: |          
+      #     inso export spec customer-api --output specs/customer.yaml
+      #     curl -X POST ${{ secrets.KONG_ADMIN_ADDR }}/${{ secrets.KONG_WORKSPACE }}/files -F path=specs/customer.yaml -F contents=@specs/customer.yaml -H "kong-admin-token: ${{ secrets.KONG_ADMIN_TOKEN }}"
+      
+      - name: Deploy to dev portal
         run: |          
-          inso export spec customer-api --output specs/customer.yaml
-          curl -X POST http://admin-20.53.172.11.nip.io/customer/files -F path=specs/customer.yaml -F contents=@specs/customer.yaml -H "kong-admin-token:Konnect2021"
+          inso export spec customer-api --output workspaces/customer/specs/customer.yaml
+          portal deploy --preserve customer
+        env:
+          KONG_ADMIN_URL: ${{ secrets.KONG_ADMIN_ADDR }}
+          KONG_ADMIN_TOKEN: ${{ secrets.KONG_ADMIN_TOKEN }}
             
        
