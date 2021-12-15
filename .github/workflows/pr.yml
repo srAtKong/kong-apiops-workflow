@@ -58,12 +58,12 @@ jobs:
 
       - name: Check connectivity to Kong Control Plane
         run: |
-          deck ping --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }}
+          deck ping --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} --tls-skip-verify
       
       - name: Validate the Declarative Config File
         run: |
-          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml
+          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml --tls-skip-verify
           
       - name: View configuration drift
         run: |
-          deck diff --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -w ${{ secrets.KONG_WORKSPACE }}
+          deck diff --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -w ${{ secrets.KONG_WORKSPACE }} --tls-skip-verify
