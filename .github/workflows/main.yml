@@ -63,11 +63,11 @@ jobs:
       
       - name: Validate the Declarative Config File
         run: |
-          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./customer/customer.yaml --tls-skip-verify
+          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./workspaces/customer/customer.yaml --tls-skip-verify
 
       # Deploy to Kong
       - name: Deploy to Kong
-        run: deck sync --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --workspace ${{ secrets.KONG_WORKSPACE }} --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./customer/customer.yaml --tls-skip-verify
+        run: deck sync --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --workspace ${{ secrets.KONG_WORKSPACE }} --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./workspaces/customer/customer.yaml --tls-skip-verify
         
       # Wait for 10 secs for the config to propagate from CP->DP // My CP is far away from DPs
       - name: Wait
