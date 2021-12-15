@@ -1,0 +1,6 @@
+_format_version: "1.1"
+_workspace: customer
+consumers:
+- keyauth_credentials:
+  - key: "${ALICE_API_KEY}$"
+  username: alice

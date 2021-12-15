@@ -55,15 +55,24 @@ jobs:
           cat kong.yaml
         env:
           TAG: customer-api
-
+      
+      - name: Replace API Key in workspace config
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '${'
+          tokenSuffix: '}$'
+          files: '["./workspaces/customer/customer.yaml"]'
+        env:
+          ALICE_API_KEY: '${{ secrets.ALICE_API_KEY }}'
+          
       - name: Check connectivity to Kong Control Plane
         run: |
           deck ping --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} --tls-skip-verify
       
       - name: Validate the Declarative Config File
         run: |
-          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml --tls-skip-verify
+          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./workspaces/customer/customer.yaml --tls-skip-verify
           
       - name: View configuration drift
         run: |
-          deck diff --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -w ${{ secrets.KONG_WORKSPACE }} --tls-skip-verify
+          deck diff --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./workspaces/customer/customer.yaml -w ${{ secrets.KONG_WORKSPACE }} --tls-skip-verify
