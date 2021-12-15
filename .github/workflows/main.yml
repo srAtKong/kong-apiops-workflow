@@ -59,15 +59,15 @@ jobs:
 
       - name: Check connectivity to Kong Control Plane
         run: |
-          deck ping --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }}
+          deck ping --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} --tls-skip-verify
       
       - name: Validate the Declarative Config File
         run: |
-          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml
+          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml --tls-skip-verify
 
       # Deploy to Kong
       - name: Deploy to Kong
-        run: deck sync --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --workspace ${{ secrets.KONG_WORKSPACE }} --skip-consumers --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml
+        run: deck sync --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --workspace ${{ secrets.KONG_WORKSPACE }} --skip-consumers --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml --tls-skip-verify
         
       # Wait for 10 secs for the config to propagate from CP->DP // My CP is far away from DPs
       - name: Wait
