@@ -62,8 +62,8 @@ jobs:
       
       - name: Validate the Declarative Config File
         run: |
-          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml --tls-skip-verify
+          deck validate --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./customer/customer.yaml --tls-skip-verify
           
       - name: View configuration drift
         run: |
-          deck diff --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -w ${{ secrets.KONG_WORKSPACE }} --tls-skip-verify
+          deck diff --headers "kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}" --kong-addr ${{ secrets.KONG_ADMIN_ADDR }} -s kong.yaml -s ./customer/customer.yaml -w ${{ secrets.KONG_WORKSPACE }} --tls-skip-verify
