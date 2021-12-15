@@ -56,6 +56,15 @@ jobs:
           cat kong.yaml
         env:
           TAG: customer-api
+      
+      - name: Replace API Key in workspace config
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '${'
+          tokenSuffix: '}$'
+          files: '["./workspaces/customer/customer.yaml"]'
+        env:
+          ALICE_API_KEY: '${{ secrets.ALICE_API_KEY }}'
 
       - name: Check connectivity to Kong Control Plane
         run: |
