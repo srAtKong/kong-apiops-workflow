@@ -115,7 +115,7 @@ jobs:
       - name: Deploy to dev portal
         run: |          
           inso export spec customer-api --output workspaces/customer/specs/customer.yaml
-          portal deploy --preserve customer
+          portal deploy -D --preserve customer
         env:
           KONG_ADMIN_URL: ${{ secrets.KONG_ADMIN_ADDR }}
           KONG_ADMIN_TOKEN: ${{ secrets.KONG_ADMIN_TOKEN }}
