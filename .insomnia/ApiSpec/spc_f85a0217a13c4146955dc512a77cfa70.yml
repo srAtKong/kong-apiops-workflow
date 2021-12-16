@@ -24,8 +24,8 @@ contents: |-
         tags:
           - customers
           
-#         security:
-#           - api_key: []
+        security:
+          - api_key: []
           
         responses:
           '200':
