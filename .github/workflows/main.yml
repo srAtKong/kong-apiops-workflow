@@ -111,6 +111,10 @@ jobs:
           files: '["./.insomnia/ApiSpec/*.yml"]'
         env:
           UPSTREAM_SERVER_URL: '${{ secrets.KONG_PROXY_ADDR }}'    
+          
+      - name: Enable Dev Portal on Workspace  
+        run: |
+          curl -sL -k -X PATCH ${{ secrets.KONG_ADMIN_ADDR }}/workspaces/${{ secrets.KONG_WORKSPACE }} --data "config.portal=true"
                 
       - name: Deploy to dev portal
         run: |          
