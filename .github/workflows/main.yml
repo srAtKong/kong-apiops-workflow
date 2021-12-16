@@ -114,7 +114,7 @@ jobs:
           
       - name: Enable Dev Portal on Workspace  
         run: |
-          curl -sL -k -X PATCH ${{ secrets.KONG_ADMIN_ADDR }}/workspaces/${{ secrets.KONG_WORKSPACE }} --data "config.portal=true"
+          curl -sL -k -X PATCH ${{ secrets.KONG_ADMIN_ADDR }}/workspaces/${{ secrets.KONG_WORKSPACE }} -H 'kong-admin-token:${{ secrets.KONG_ADMIN_TOKEN }}' --data "config.portal=true"
                 
       - name: Deploy to dev portal
         run: |          
