@@ -1,7 +1,7 @@
 _id: spc_f85a0217a13c4146955dc512a77cfa70
 type: ApiSpec
 parentId: wrk_7b56d716c5424a37beaf47c1ac5ed85b
-modified: 1639542066009
+modified: 1639627089684
 created: 1631268851818
 fileName: customer-api
 contents: |-
@@ -24,8 +24,8 @@ contents: |-
         tags:
           - customers
           
-  #       security:
-  #         - api_key: []
+        security:
+          - api_key: []
           
         responses:
           '200':
