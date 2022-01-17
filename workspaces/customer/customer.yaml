@@ -5,29 +5,29 @@ consumers:
   - key: "${ALICE_API_KEY}$"
   username: alice
 
-plugins:
-- config:
-    day: null
-    fault_tolerant: true
-    header_name: null
-    hide_client_headers: false
-    hour: null
-    limit_by: consumer
-    minute: 5
-    month: null
-    path: null
-    policy: local
-    redis_database: 0
-    redis_host: null
-    redis_password: null
-    redis_port: 6379
-    redis_timeout: 2000
-    second: null
-    year: null
-  enabled: true
-  name: rate-limiting
-  protocols:
-  - grpc
-  - grpcs
-  - http
-  - https
+# plugins:
+# - config:
+#     day: null
+#     fault_tolerant: true
+#     header_name: null
+#     hide_client_headers: false
+#     hour: null
+#     limit_by: consumer
+#     minute: 5
+#     month: null
+#     path: null
+#     policy: local
+#     redis_database: 0
+#     redis_host: null
+#     redis_password: null
+#     redis_port: 6379
+#     redis_timeout: 2000
+#     second: null
+#     year: null
+#   enabled: true
+#   name: rate-limiting
+#   protocols:
+#   - grpc
+#   - grpcs
+#   - http
+#   - https
