@@ -1,7 +1,7 @@
 _id: spc_f85a0217a13c4146955dc512a77cfa70
 type: ApiSpec
 parentId: wrk_7b56d716c5424a37beaf47c1ac5ed85b
-modified: 1646294529554
+modified: 1646295000782
 created: 1631268851818
 fileName: customer-api
 contents: |-
@@ -19,7 +19,7 @@ contents: |-
   paths:
     "/customers":
       get:
-        summary: List all customerssssss
+        summary: List all customersssssss
         operationId: listCustomers
         tags:
           - customers
