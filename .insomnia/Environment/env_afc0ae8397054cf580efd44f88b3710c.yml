@@ -1,14 +1,14 @@
 _id: env_afc0ae8397054cf580efd44f88b3710c
 type: Environment
 parentId: env_98ca71149a7cb9bc0e00c9a755315f204b6fbc69
-modified: 1642396619501
+modified: 1646287093842
 created: 1631269116888
 name: Azure
 data:
   scheme:
     - http
   base_path: ""
-  host: proxy-20.92.218.125.nip.io
+  host: proxy-20.92.212.204.nip.io
   apiKey: "123"
 dataPropertyOrder:
   "&":
