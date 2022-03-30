@@ -1,6 +1,6 @@
 # kong-apiops-demo
 
-A simple demo of the APIOps workflow in Kong
+A demo of the APIOps workflow in Kong to allow you to get started with end to end autoamtion of the API Lifecycle
 
 - Design and Test your API using Insomnia
 - Generate declarative config using inso
