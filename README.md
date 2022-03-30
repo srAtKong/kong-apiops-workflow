@@ -1,4 +1,4 @@
-# kong-apiops-demo
+# APIOps Demo for Kong
 
 A demo of the APIOps workflow in Kong to allow you to get started with end to end autoamtion of the API Lifecycle
 
@@ -8,3 +8,5 @@ A demo of the APIOps workflow in Kong to allow you to get started with end to en
 - Publish your API using the [Kong Portal CLI](https://github.com/Kong/kong-portal-cli)
 
 The workflow is developed using GitHub Actions
+
+For more information on APIOps in Kong, read [this](https://konghq.com/blog/what-is-apiops) blog
